@@ -1,6 +1,26 @@
 includes:
 	- ../../../conf/bleedingEdge.neon
 
+parametersSchema:
+	disallowedConstants: listOf(
+		arrayOf(
+			anyOf(
+				string(),
+				listOf(string()),
+				arrayOf(anyOf(int(), string(), bool()))
+			)
+		)
+	)
+
+services:
+	-
+		factory: PHPStan\ClassConstantUsages(disallowedConstants: %disallowedConstants%)
+		tags:
+			- phpstan.rules.rule
+
 parameters:
+	disallowedConstants:
+		-
+			constant: "DateTimeImmutable::ISO8601"
 	dynamicConstantNames:
 		- Levels\Comparison\Foo::FOO_CONST
