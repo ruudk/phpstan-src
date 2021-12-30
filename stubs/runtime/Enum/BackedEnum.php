@@ -7,6 +7,8 @@ if (\PHP_VERSION_ID < 80100) {
 
 	interface BackedEnum extends UnitEnum
 	{
+		public string $value;
+
 		public static function from(int|string $value): static;
 
 		public static function tryFrom(int|string $value): ?static;
